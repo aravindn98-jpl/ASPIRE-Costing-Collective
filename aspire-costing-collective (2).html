@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASPIRE Costing Collective</title>
+    <style>
+        :root {
+            --teal: #2faa9f;
+            --orange: #e35925;
+            --yellow: #f4c300;
+            --green: #4a9c65;
+            --dark-cyan: #2d616e;
+            --mid-gray: #646464;
+            --light-gray: #cacaca;
+            --soft-gray: #919191;
+            --white: #ffffff;
+            --body-text: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: var(--white);
+            color: var(--body-text);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: sticky; top: 0;
+            background: white;
+            border-bottom: 1px solid var(--light-gray);
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        nav-content {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 2rem; flex-wrap: wrap;
+        }
+        .nav-brand { padding: 0.6rem 0; display: flex; align-items: center; }
+        .nav-brand img { height: 38px; width: auto; display: block; }
+        nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        nav a {
+            text-decoration: none; color: var(--mid-gray);
+            font-size: 13px; font-weight: 600;
+            padding: 1.1rem 0; border-bottom: 2px solid transparent;
+            transition: all 0.25s; cursor: pointer; letter-spacing: 0.2px;
+        }
+        nav a:hover, nav a.active {
+            color: var(--dark-cyan);
+            border-bottom-color: var(--teal);
+        }
+
+        /* SECTIONS */
+        section { display: none; animation: fadeIn 0.35s ease-in; }
+        section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-cyan) 0%, #1a3a40 100%);
+            color: white; padding: 3.5rem 2rem; text-align: center;
+        }
+        .hero h1 { font-size: 44px; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
+        .hero p { font-size: 17px; opacity: 0.9; margin-bottom: 2rem; }
+
+        /* CONTAINERS */
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+        h2 {
+            font-size: 28px; font-weight: 700; margin-bottom: 0.4rem;
+            color: var(--orange);
+        }
+        .section-subtitle {
+            font-size: 15px; color: var(--soft-gray);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 0.75rem;
+        }
+        h3 {
+            font-size: 18px; font-weight: 700;
+            color: var(--teal);
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* CARDS */
+        .card {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;
+            transition: all 0.25s;
+        }
+        .card:hover {
+            box-shadow: 0 4px 14px rgba(45,97,110,0.1);
+            border-color: var(--teal);
+        }
+
+        .alert {
+            background: linear-gradient(135deg, #e6f6f5 0%, #f0faf9 100%);
+            border-left: 5px solid var(--teal);
+            padding: 1.5rem; border-radius: 6px;
+            margin-bottom: 2rem; font-size: 14.5px; line-height: 1.75;
+        }
+        .alert strong { color: var(--dark-cyan); }
+
+        /* FEATURE GRID */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem; margin-bottom: 2rem;
+        }
+        .feature-item {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.5rem; text-align: center;
+            transition: all 0.25s;
+        }
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(47,170,159,0.12);
+            border-color: var(--teal);
+        }
+        .feature-icon { font-size: 36px; margin-bottom: 0.75rem; }
+        .feature-title { font-size: 15px; font-weight: 700; color: var(--dark-cyan); margin-bottom: 0.4rem; }
+        .feature-desc { font-size: 13px; color: var(--mid-gray); line-height: 1.6; }
+
+        /* STATS */
+        .stats-box {
+            background: linear-gradient(135deg, #e6f6f5 0%, #f0faf9 100%);
+            border-radius: 8px; padding: 2rem; margin-bottom: 2rem;
+            border-left: 5px solid var(--teal);
+        }
+        .stats-inner {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; text-align: center;
+        }
+        .stat-num {
+            font-size: 40px; font-weight: 700;
+            color: var(--orange); margin-bottom: 0.4rem;
+        }
+        .stat-label { font-size: 13px; color: var(--mid-gray); font-weight: 600; }
+        .stat-divider {
+            border-left: 1px solid var(--teal);
+            border-right: 1px solid var(--teal);
+            padding: 0 2rem;
+        }
+
+        /* CONTACTS */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.25rem; margin-top: 1rem;
+        }
+        .contact-card {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.25rem;
+            border-top: 3px solid var(--teal);
+            transition: all 0.25s; text-decoration: none;
+            display: block; color: inherit;
+        }
+        .contact-card:hover {
+            box-shadow: 0 4px 14px rgba(47,170,159,0.12);
+            border-top-color: var(--orange);
+            transform: translateY(-2px);
+        }
+        .contact-photo {
+            width: 64px; height: 64px; border-radius: 50%;
+            object-fit: cover; margin-bottom: 0.75rem;
+            border: 2px solid var(--teal);
+        }
+        .contact-name { font-size: 15px; font-weight: 700; color: var(--dark-cyan); margin-bottom: 0.2rem; }
+        .contact-title { font-size: 12px; color: var(--soft-gray); margin-bottom: 0.4rem; line-height: 1.4; }
+        .contact-email { font-size: 12px; color: var(--teal); }
+
+        /* DIVIDER */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--light-gray), transparent);
+            margin: 2rem 0;
+        }
+
+        /* QUOTE BOX */
+        .quote-box {
+            font-size: 16px; font-weight: 600; color: var(--dark-cyan);
+            padding: 1.5rem;
+            background: linear-gradient(to right, rgba(47,170,159,0.06), transparent);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 6px 6px 0;
+            margin: 2rem 0;
+        }
+
+        /* DASHBOARD */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .metric-label {
+            font-size: 11px; color: var(--soft-gray);
+            text-transform: uppercase; letter-spacing: 0.6px;
+            font-weight: 700; margin-bottom: 0.75rem;
+        }
+        .metric-value {
+            font-size: 32px; font-weight: 700;
+            color: var(--orange); margin-bottom: 0.4rem;
+        }
+        .metric-subtitle { font-size: 13px; color: var(--mid-gray); }
+
+        /* PHASE ACCORDION */
+        .phase-accordion { margin-bottom: 1.5rem; }
+        .phase-header {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1rem 1.25rem;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; transition: all 0.25s;
+            border-left: 4px solid var(--teal);
+        }
+        .phase-header:hover { border-color: var(--teal); box-shadow: 0 2px 8px rgba(47,170,159,0.1); }
+        .phase-header.current { border-left-color: var(--orange); background: linear-gradient(to right, rgba(227,89,37,0.04), white); }
+        .phase-header.next-phase { border-left-color: var(--yellow); background: linear-gradient(to right, rgba(244,195,0,0.04), white); }
+        .phase-title-wrap { display: flex; flex-direction: column; gap: 0.2rem; }
+        .phase-label {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px;
+            font-weight: 700;
+        }
+        .phase-label.current { color: var(--orange); }
+        .phase-label.next-phase { color: var(--yellow); filter: brightness(0.8); }
+        .phase-label.completed { color: var(--teal); }
+        .phase-name { font-size: 16px; font-weight: 700; color: var(--body-text); }
+        .phase-period { font-size: 13px; color: var(--soft-gray); }
+        .phase-chevron {
+            font-size: 18px; color: var(--soft-gray);
+            transition: transform 0.25s; user-select: none;
+        }
+        .phase-header.open .phase-chevron { transform: rotate(180deg); }
+        .phase-body {
+            display: none; padding: 1rem 1.25rem 1.25rem;
+            border: 1px solid var(--light-gray);
+            border-top: none; border-radius: 0 0 8px 8px;
+            background: #fafafa;
+        }
+        .phase-body.open { display: block; }
+        .activity-item {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.6rem 0; border-bottom: 1px solid var(--light-gray);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--teal); margin-top: 6px; flex-shrink: 0;
+        }
+        .activity-text { font-size: 14px; color: var(--mid-gray); }
+        .activity-date {
+            font-size: 11px; color: var(--soft-gray);
+            font-weight: 600; margin-top: 2px;
+        }
+
+        /* STATUS CARDS */
+        .status-section { margin-bottom: 2rem; }
+        .status-card {
+            background: linear-gradient(135deg, #e6f6f5 0%, #f0faf9 100%);
+            border-left: 5px solid var(--teal);
+            padding: 1.25rem; border-radius: 6px; margin-bottom: 1rem;
+        }
+        .status-card.yellow { background: linear-gradient(135deg, #fef9e7 0%, #fffdf0 100%); border-left-color: var(--yellow); }
+        .status-card.orange { background: linear-gradient(135deg, #fdf1ec 0%, #fef6f3 100%); border-left-color: var(--orange); }
+        .status-title {
+            font-size: 14px; font-weight: 700; color: var(--dark-cyan);
+            margin-bottom: 0.5rem;
+        }
+        .status-card.yellow .status-title { color: #8a6c00; }
+        .status-card.orange .status-title { color: var(--orange); }
+        .status-text { font-size: 13px; color: var(--mid-gray); line-height: 1.7; }
+        .milestone-item {
+            display: flex; gap: 0.6rem; align-items: flex-start;
+            margin-bottom: 0.5rem; font-size: 13px; color: var(--mid-gray);
+        }
+        .milestone-item::before {
+            content: "→"; color: var(--teal); font-weight: 700; flex-shrink: 0;
+        }
+
+        /* WG GRID */
+        .wg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem; margin-bottom: 2rem;
+        }
+        .wg-box {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; overflow: hidden;
+        }
+        .wg-header {
+            background: var(--dark-cyan); color: white;
+            padding: 1.5rem; border-radius: 8px 8px 0 0;
+        }
+        .wg-header h4 { font-size: 17px; font-weight: 700; margin-bottom: 0.4rem; }
+        .wg-header p { font-size: 12.5px; opacity: 0.85; }
+        .wg-body { padding: 1.5rem; }
+        .wg-body p { font-size: 13.5px; color: var(--mid-gray); margin-bottom: 0.75rem; line-height: 1.7; }
+
+        /* MEMBERS */
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem; margin: 1.5rem 0;
+        }
+        .member {
+            background: #f9f9f9; border: 1px solid var(--light-gray);
+            border-radius: 6px; padding: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .member.aspire-poc { border-left-color: var(--orange); background: #fdf8f6; }
+        .member-name { font-size: 14.5px; font-weight: 700; color: var(--dark-cyan); margin-bottom: 0.2rem; }
+        .member-org { font-size: 12.5px; color: var(--soft-gray); margin-bottom: 0.5rem; }
+        .member-role {
+            display: inline-block;
+            background: var(--dark-cyan); color: white;
+            padding: 0.25rem 0.65rem; border-radius: 3px;
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+        }
+        .role-captain { background: var(--teal); }
+        .role-aspire { background: var(--orange); }
+
+        /* TIMELINE */
+        .timeline { margin-bottom: 2rem; }
+        .timeline-item {
+            display: grid; grid-template-columns: 200px 1fr;
+            gap: 2rem; margin-bottom: 2rem;
+            padding-bottom: 2rem; border-bottom: 1px solid var(--light-gray);
+        }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-left { font-weight: 700; color: var(--dark-cyan); }
+        .timeline-status {
+            font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.5px; color: var(--soft-gray); margin-bottom: 0.4rem;
+        }
+        .timeline-title { font-size: 17px; font-weight: 700; color: var(--body-text); }
+        .timeline-right { padding-top: 0.5rem; }
+        .timeline-desc { font-size: 13.5px; color: var(--mid-gray); line-height: 1.7; }
+
+        /* MILESTONES (formerly deliverables) */
+        .milestone-section { margin-bottom: 2.5rem; }
+        .ms-group-header {
+            display: flex; justify-content: space-between; align-items: center;
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1rem 1.25rem;
+            cursor: pointer; transition: all 0.25s;
+            border-left: 4px solid var(--dark-cyan);
+            margin-bottom: 0;
+        }
+        .ms-group-header:hover { box-shadow: 0 2px 8px rgba(45,97,110,0.1); }
+        .ms-group-header.wg1 { border-left-color: var(--orange); }
+        .ms-group-header.wg2 { border-left-color: var(--teal); }
+        .ms-group-header.wg3 { border-left-color: var(--green); }
+        .ms-group-title { font-size: 15px; font-weight: 700; color: var(--body-text); }
+        .ms-group-sub { font-size: 12px; color: var(--soft-gray); margin-top: 2px; }
+        .ms-chevron {
+            font-size: 18px; color: var(--soft-gray);
+            transition: transform 0.25s;
+        }
+        .ms-group-header.open .ms-chevron { transform: rotate(180deg); }
+        .ms-group-body {
+            display: none;
+            border: 1px solid var(--light-gray); border-top: none;
+            border-radius: 0 0 8px 8px; margin-bottom: 1.25rem;
+        }
+        .ms-group-body.open { display: block; }
+        .ms-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+        .ms-table thead { background: #f5f5f5; border-bottom: 1px solid var(--light-gray); }
+        .ms-table th {
+            padding: 0.75rem 1rem; text-align: left;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px;
+            color: var(--soft-gray); font-weight: 700;
+        }
+        .ms-table td { padding: 0.9rem 1rem; border-bottom: 1px solid #f0f0f0; }
+        .ms-table tr:last-child td { border-bottom: none; }
+        .ms-table tr:hover { background: #fafafa; }
+        .status-badge {
+            display: inline-block; padding: 0.3rem 0.7rem;
+            border-radius: 4px; font-size: 10.5px; font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-upcoming { background: #fce4ec; color: #b71c1c; }
+        .badge-planned { background: #e3f2fd; color: #1565c0; }
+        .wg-badge {
+            display: inline-block; padding: 0.25rem 0.6rem;
+            border-radius: 3px; font-size: 10px; font-weight: 700;
+            text-transform: uppercase; background: #f0f0f0;
+            color: var(--dark-cyan); border: 1px solid var(--light-gray);
+        }
+
+        /* GOVERNANCE */
+        .cadence-card {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;
+        }
+        .cadence-row {
+            display: flex; gap: 1rem; padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f0f0; align-items: baseline;
+        }
+        .cadence-row:last-child { border-bottom: none; }
+        .cadence-freq {
+            font-weight: 700; color: var(--teal);
+            min-width: 130px; font-size: 14px;
+        }
+        .cadence-desc { font-size: 13.5px; color: var(--mid-gray); }
+
+        /* RESOURCES */
+        .resource-item {
+            background: white; border: 1px solid var(--light-gray);
+            border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem;
+            transition: all 0.25s;
+        }
+        .resource-item:hover {
+            box-shadow: 0 4px 12px rgba(47,170,159,0.1);
+            border-color: var(--teal);
+        }
+        .resource-title { font-size: 15px; font-weight: 700; color: var(--dark-cyan); margin-bottom: 0.4rem; }
+        .resource-desc { font-size: 13.5px; color: var(--mid-gray); margin-bottom: 0.75rem; line-height: 1.6; }
+        .resource-link {
+            display: inline-block; color: var(--teal); text-decoration: none;
+            font-weight: 600; border-bottom: 2px solid var(--teal);
+            padding-bottom: 1px; font-size: 13px;
+            transition: all 0.2s;
+        }
+        .resource-link:hover { color: var(--orange); border-bottom-color: var(--orange); }
+
+        /* WHATSAPP BTN */
+        .wa-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: #25d366; color: white;
+            text-decoration: none; padding: 0.6rem 1.2rem;
+            border-radius: 6px; font-size: 13px; font-weight: 700;
+            margin-top: 0.75rem; transition: background 0.2s;
+        }
+        .wa-link:hover { background: #1da851; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 28px; }
+            .stats-inner { grid-template-columns: 1fr; }
+            .stat-divider { border: none; padding: 0; }
+            .wg-grid { grid-template-columns: 1fr; }
+            .timeline-item { grid-template-columns: 1fr; gap: 0.75rem; }
+            nav-links { gap: 0.75rem; }
+            nav a { font-size: 11.5px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <nav-content>
+        <a href="https://www.povertyactionlab.org/aspire" target="_blank" class="nav-brand">
+            <img src="https://www.povertyactionlab.org/sites/default/files/2023-11/ASPIRE%20Logo-3.png" alt="ASPIRE – Hosted by J-PAL South Asia">
+        </a>
+        <nav-links>
+            <a onclick="showSection('overview')" class="nav-link active">Overview</a>
+            <a onclick="showSection('dashboard')" class="nav-link">Dashboard</a>
+            <a onclick="showSection('milestones')" class="nav-link">Milestones</a>
+            <a onclick="showSection('governance')" class="nav-link">Governance</a>
+            <a onclick="showSection('wg1')" class="nav-link">WG1</a>
+            <a onclick="showSection('wg2')" class="nav-link">WG2</a>
+            <a onclick="showSection('wg3')" class="nav-link">WG3</a>
+            <a onclick="showSection('timeline')" class="nav-link">Timeline</a>
+            <a onclick="showSection('resources')" class="nav-link">Resources</a>
+        </nav-links>
+    </nav-content>
+</nav>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<section id="overview" class="active">
+    <div class="hero">
+        <h1>ASPIRE Costing Collective</h1>
+        <p>Community of Practice for Cost-Effectiveness Research</p>
+    </div>
+
+    <div class="container">
+        <h2>Overview</h2>
+        <p class="section-subtitle">An experimental, voluntary initiative convened by ASPIRE at J-PAL South Asia</p>
+
+        <div class="alert">
+            The ASPIRE Costing Collective brings together implementation practitioners, donors, and researchers to design and scale cost-effective solutions to complex policy challenges.
+        </div>
+
+        <h3>Our Guiding Question</h3>
+        <div class="quote-box">
+            How can we do more with every rupee spent on development programs?
+        </div>
+
+        <h3>Vision</h3>
+        <div class="card" style="display:flex; gap:1rem; align-items:flex-start;">
+            <span style="font-size:32px;">📊</span>
+            <span>Make cost and value measurement easier to understand, compare, and use when making decisions about scaling effective poverty-reduction interventions.</span>
+        </div>
+
+        <h3>How We Work</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">Convene</div>
+                <div class="feature-desc">Bring together a voluntary, cross-sector cohort of practitioners, researchers, funders, and policymakers</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">Align</div>
+                <div class="feature-desc">Develop shared understanding of core concepts, frameworks, and tools for cost-effectiveness</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💡</div>
+                <div class="feature-title">Strengthen</div>
+                <div class="feature-desc">Create practical heuristics and methodologies adapted for local contexts</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Analyze</div>
+                <div class="feature-desc">Design and pilot data analysis on publicly available cost datasets</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3>By the Numbers</h3>
+        <div class="stats-box">
+            <div class="stats-inner">
+                <div>
+                    <div class="stat-num">20</div>
+                    <div class="stat-label">Practitioners &amp; Researchers</div>
+                </div>
+                <div class="stat-divider">
+                    <div class="stat-num">16</div>
+                    <div class="stat-label">Partner Organizations</div>
+                </div>
+                <div>
+                    <div class="stat-num">3</div>
+                    <div class="stat-label">Working Groups</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>ASPIRE Team Contacts</h3>
+        <div class="contact-grid">
+            <a href="https://www.povertyactionlab.org/person/nair-4?lang=en" target="_blank" class="contact-card">
+                <img src="https://www.povertyactionlab.org/sites/default/files/styles/hea/public/images/2024/02/Aravind%20Nair.jpg?itok=OVuyatS7"
+                     alt="Aravind Nair" class="contact-photo">
+                <div class="contact-name">Aravind Nair</div>
+                <div class="contact-title">Senior Policy Associate, J-PAL South Asia</div>
+                <div class="contact-email">anair@povertyactionlab.org</div>
+            </a>
+            <a href="https://www.povertyactionlab.org/person/chowdhry" target="_blank" class="contact-card">
+                <img src="https://www.povertyactionlab.org/sites/default/files/styles/hea/public/images/2024/11/Parikrama%20Chowdhry.jpeg?itok=qFrSOZkm"
+                     alt="Parikrama Chowdhry" class="contact-photo">
+                <div class="contact-name">Parikrama Chowdhry</div>
+                <div class="contact-title">Lead – Policy (Scale Ups), J-PAL South Asia</div>
+                <div class="contact-email">pchowdhry@povertyactionlab.org</div>
+            </a>
+            <a href="https://www.povertyactionlab.org/person/grover" target="_blank" class="contact-card">
+                <img src="https://www.povertyactionlab.org/sites/default/files/styles/hea/public/images/2023/05/Rijul%20Grover.jpg?itok=tfGgghZ4"
+                     alt="Rijul Grover" class="contact-photo">
+                <div class="contact-name">Rijul Grover</div>
+                <div class="contact-title">Policy Manager, J-PAL South Asia</div>
+                <div class="contact-email">rgrover@povertyactionlab.org</div>
+            </a>
+            <a href="https://www.povertyactionlab.org/person/pande-1" target="_blank" class="contact-card">
+                <img src="https://www.povertyactionlab.org/sites/default/files/styles/hea/public/images/2023/05/Trisha%20Pande.jpg?itok=Mrz3g9wj"
+                     alt="Trisha Pande" class="contact-photo">
+                <div class="contact-name">Trisha Pande</div>
+                <div class="contact-title">Policy Manager, J-PAL South Asia</div>
+                <div class="contact-email">tpande@povertyactionlab.org</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<section id="dashboard">
+    <div class="container">
+        <h2>Costing Collective Dashboard</h2>
+        <p class="section-subtitle">Live Costing Collective status and key metrics</p>
+
+        <div class="dashboard-grid">
+            <div class="metric-card">
+                <div class="metric-label">Current Phase</div>
+                <div class="metric-value" style="font-size:20px; line-height:1.3;">Launch &amp; Alignment</div>
+                <div class="metric-subtitle">September 2025 – May 2026</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Milestones</div>
+                <div class="metric-value">6</div>
+                <div class="metric-subtitle">Across 3 Working Groups</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Team Members</div>
+                <div class="metric-value">20</div>
+                <div class="metric-subtitle">Across 3 Working Groups</div>
+            </div>
+        </div>
+
+        <h3>Phase Activity Log</h3>
+        <p style="font-size:13px; color:var(--soft-gray); margin-bottom:1.25rem;">Click on any phase to expand its key activities. Completed phases are collapsed by default.</p>
+
+        <!-- Phase 1 – current, open by default -->
+        <div class="phase-accordion">
+            <div class="phase-header current open" onclick="togglePhase(this)">
+                <div class="phase-title-wrap">
+                    <span class="phase-label current">● Current Phase</span>
+                    <span class="phase-name">Launch &amp; Alignment</span>
+                    <span class="phase-period">September 2025 – May 2026</span>
+                </div>
+                <span class="phase-chevron">▼</span>
+            </div>
+            <div class="phase-body open">
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">Launch at the India Scale-up Summit hosted by ASPIRE at J-PAL South Asia</div>
+                        <div class="activity-date">September 2025</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">Interest Forms received by ASPIRE</div>
+                        <div class="activity-date">October – November 2025</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">ASPIRE Costing Collective – Virtual Onboarding</div>
+                        <div class="activity-date">February 2026</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">Working Group Formation</div>
+                        <div class="activity-date">February – March 2026</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">Self-Nominations to Steering Groups received</div>
+                        <div class="activity-date">March – April 2026</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--orange);"></div>
+                    <div>
+                        <div class="activity-text">Steering Group Member – Alignment Call</div>
+                        <div class="activity-date">May 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2 – next, collapsed -->
+        <div class="phase-accordion">
+            <div class="phase-header next-phase" onclick="togglePhase(this)">
+                <div class="phase-title-wrap">
+                    <span class="phase-label next-phase">◆ Next Phase</span>
+                    <span class="phase-name">Shared Foundations</span>
+                    <span class="phase-period">May – July 2026</span>
+                </div>
+                <span class="phase-chevron">▼</span>
+            </div>
+            <div class="phase-body">
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--yellow); filter:brightness(0.75);"></div>
+                    <div>
+                        <div class="activity-text">Working Group 1 Meeting</div>
+                        <div class="activity-date">29 May 2026</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--light-gray);"></div>
+                    <div>
+                        <div class="activity-text">Finalize the annual calendar and respective Working Group Agenda — <strong>Action Point by SGs for respective WGs</strong></div>
+                        <div class="activity-date">May – July 2026</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-dot" style="background:var(--light-gray);"></div>
+                    <div>
+                        <div class="activity-text">Resource compendium, expert sessions, glossary development, core frameworks</div>
+                        <div class="activity-date">May – July 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Status Update</h3>
+
+        <div class="status-section">
+            <div class="status-card orange">
+                <div class="status-title">📋 Upcoming Milestones</div>
+                <div class="milestone-item">Steering Group Meeting: 15th May, 4:00 PM – 5:00 PM IST</div>
+                <div class="milestone-item">First Working Group 1 Meeting: 29th May, 4:00 PM – 5:00 PM IST</div>
+            </div>
+
+            <div class="status-card">
+                <div class="status-title">🎯 Current Focus</div>
+                <div class="status-text">Aligning on the agenda across Working Groups and jointly setting milestones in line with the evolving learning agenda from Working Group 1.</div>
+            </div>
+
+            <div class="status-card yellow">
+                <div class="status-title">⏭️ Next Steps</div>
+                <div class="status-text">Steering Groups to set monthly cadence across their Working Groups using the shared WhatsApp Group.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ MILESTONES ═══════════════ -->
+<section id="milestones">
+    <div class="container">
+        <h2>Milestone Tracker</h2>
+        <p class="section-subtitle">Track progress across all Working Groups</p>
+
+        <!-- Immediate Cross-WG Milestones -->
+        <div class="milestone-section">
+            <div class="ms-group-header open" style="border-left-color: var(--yellow);" onclick="toggleMsGroup(this)">
+                <div>
+                    <div class="ms-group-title">Immediate Milestones — All Working Groups</div>
+                    <div class="ms-group-sub">6 milestones</div>
+                </div>
+                <span class="ms-chevron">▼</span>
+            </div>
+            <div class="ms-group-body open">
+                <table class="ms-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Alignment among all SG members</strong><br><span style="font-size:12px;color:#999;">Cross-WG alignment call</span></td>
+                            <td>15 May 2026</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>WG1 circulates learning priorities &amp; tentative calendar</strong><br><span style="font-size:12px;color:#999;">Shared across all Working Groups</span></td>
+                            <td>15 June 2026</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SG members set the agenda and cadence</strong><br><span style="font-size:12px;color:#999;">For respective Working Groups</span></td>
+                            <td>30 June 2026</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>First set of meetings — Working Groups 2 &amp; 3</strong><br><span style="font-size:12px;color:#999;">Monthly checkpoint established</span></td>
+                            <td>1 – 15 July 2026</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGs share takeaways &amp; next steps</strong><br><span style="font-size:12px;color:#999;">With ASPIRE at J-PAL SA PoC</span></td>
+                            <td>Ongoing</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ASPIRE at J-PAL SA updates the tracker</strong><br><span style="font-size:12px;color:#999;">Every Friday by 6 PM IST</span></td>
+                            <td>Weekly (Fridays)</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- WG1 Group -->
+        <div class="milestone-section">
+            <div class="ms-group-header wg1 open" onclick="toggleMsGroup(this)">
+                <div>
+                    <div class="ms-group-title">Working Group 1 — Learning Design &amp; Dissemination</div>
+                    <div class="ms-group-sub">3 milestones</div>
+                </div>
+                <span class="ms-chevron">▼</span>
+            </div>
+            <div class="ms-group-body open">
+                <table class="ms-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Expert Session #1</strong><br><span style="font-size:12px;color:#999;">Cost-Effectiveness 101</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resource Compendium</strong><br><span style="font-size:12px;color:#999;">Foundational resources</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Toolkits &amp; Templates</strong><br><span style="font-size:12px;color:#999;">Practical resources</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- WG2 Group -->
+        <div class="milestone-section">
+            <div class="ms-group-header wg2 open" onclick="toggleMsGroup(this)">
+                <div>
+                    <div class="ms-group-title">Working Group 2 — Methods &amp; Frameworks</div>
+                    <div class="ms-group-sub">2 milestones</div>
+                </div>
+                <span class="ms-chevron">▼</span>
+            </div>
+            <div class="ms-group-body open">
+                <table class="ms-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Common Glossary</strong><br><span style="font-size:12px;color:#999;">Shared vocabulary for costing</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-planned">Upcoming</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Costing Standards</strong><br><span style="font-size:12px;color:#999;">Adapted for South Asian context</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- WG3 Group -->
+        <div class="milestone-section">
+            <div class="ms-group-header wg3 open" onclick="toggleMsGroup(this)">
+                <div>
+                    <div class="ms-group-title">Working Group 3 — Applied Analysis &amp; Case Work</div>
+                    <div class="ms-group-sub">1 milestone</div>
+                </div>
+                <span class="ms-chevron">▼</span>
+            </div>
+            <div class="ms-group-body open">
+                <table class="ms-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Case Studies</strong><br><span style="font-size:12px;color:#999;">Real-world examples (3–5)</span></td>
+                            <td>TBD</td>
+                            <td><span class="status-badge badge-upcoming">Planned</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ GOVERNANCE ═══════════════ -->
+<section id="governance">
+    <div class="container">
+        <h2>Governance Structure</h2>
+        <p class="section-subtitle">How the Collective is organized and led</p>
+
+        <div class="alert">
+            <strong>Convener:</strong> ASPIRE at J-PAL South Asia leads the design of the learning agenda, convenes quarterly meetings, and synthesizes outputs.<br><br>
+            <strong>Steering Group:</strong> Formed by representatives self-nominated to lead each Working Group, rotating bi-annually to ensure diverse leadership.<br><br>
+            <strong>Working Groups:</strong> Meet bi-weekly to review progress and coordinate tasks. Deliver outputs every three months aligned to the quarterly cycle.<br><br>
+            <strong>WhatsApp Group:</strong> All Steering Group and Working Group members coordinate between meetings via a shared WhatsApp Group.
+            <br>
+            <a href="https://chat.whatsapp.com" target="_blank" class="wa-link">💬 Join WhatsApp Group</a>
+        </div>
+
+        <h3>Steering Group</h3>
+        <p style="margin-bottom:1.5rem; color:var(--soft-gray); font-size:13.5px;">Representatives from each Working Group who set and facilitate agendas, consolidate progress, resolve open questions, and rotate bi-annually.</p>
+
+        <div class="wg-grid">
+            <div class="wg-box">
+                <div class="wg-header">
+                    <h4>Working Group 1</h4>
+                    <p>Learning Design &amp; Dissemination</p>
+                </div>
+                <div class="wg-body">
+                    <p>Shapes learning agenda, facilitates expert sessions, disseminates progress to broader ecosystem.</p>
+                    <p style="margin-top:0.75rem; font-size:13px; color:var(--dark-cyan); font-weight:600;">Steering Group Members:</p>
+                    <p style="font-size:13px; margin-bottom:0.25rem;">Kumar Das — BRAC</p>
+                    <p style="font-size:13px;">Arnab Mandal — Tata Trusts</p>
+                </div>
+            </div>
+            <div class="wg-box">
+                <div class="wg-header">
+                    <h4>Working Group 2</h4>
+                    <p>Methods &amp; Frameworks</p>
+                </div>
+                <div class="wg-body">
+                    <p>Identifies gaps in costing concepts, consolidates knowledge on frameworks and heuristics.</p>
+                    <p style="margin-top:0.75rem; font-size:13px; color:var(--dark-cyan); font-weight:600;">Steering Group Member:</p>
+                    <p style="font-size:13px;">Pooja Srivathsan — Madhi Foundation</p>
+                </div>
+            </div>
+            <div class="wg-box">
+                <div class="wg-header">
+                    <h4>Working Group 3</h4>
+                    <p>Applied Analysis &amp; Case Work</p>
+                </div>
+                <div class="wg-body">
+                    <p>Identifies publicly available costing data, analyzes insights on pilot-to-scale costing.</p>
+                    <p style="margin-top:0.75rem; font-size:13px; color:var(--dark-cyan); font-weight:600;">Steering Group Member:</p>
+                    <p style="font-size:13px;">Suchandrima Chakraborty — Khushi Baby</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Meeting Cadence</h3>
+        <div class="cadence-card">
+            <div class="cadence-row">
+                <span class="cadence-freq">Fortnightly</span>
+                <span class="cadence-desc">Working Groups meet to review progress and coordinate tasks</span>
+            </div>
+            <div class="cadence-row">
+                <span class="cadence-freq">Monthly</span>
+                <span class="cadence-desc">Steering Group representatives share progress updates with ASPIRE</span>
+            </div>
+            <div class="cadence-row">
+                <span class="cadence-freq">Quarterly</span>
+                <span class="cadence-desc">Steering Group convened by ASPIRE to align on agenda and resolve hurdles</span>
+            </div>
+            <div class="cadence-row">
+                <span class="cadence-freq">Every 3 months</span>
+                <span class="cadence-desc">Outputs delivered and consolidated</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ WG1 ═══════════════ -->
+<section id="wg1">
+    <div class="container">
+        <h2>Working Group 1: Learning Design &amp; Dissemination</h2>
+        <p class="section-subtitle">8 members • Steering Group Members: Kumar Das (BRAC) &amp; Arnab Mandal (Tata Trusts)</p>
+
+        <div class="alert">
+            <strong>Purpose:</strong> Shape the learning agenda and outputs for all Working Groups. Facilitate expert sessions to address learning needs of the group. Disseminate the Collective's progress to the broader ecosystem.
+        </div>
+
+        <h3>Members</h3>
+        <div class="member-grid">
+            <div class="member">
+                <div class="member-name">Kumar Das</div>
+                <div class="member-org">BRAC</div>
+                <span class="member-role role-captain">Steering Group Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Arnab Mandal</div>
+                <div class="member-org">Tata Trusts</div>
+                <span class="member-role role-captain">Steering Group Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Garima Manocha</div>
+                <div class="member-org">MSDF</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Seema Murthy</div>
+                <div class="member-org">Noora Health</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Giresh Mohan</div>
+                <div class="member-org">ITC</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Prabhakar L</div>
+                <div class="member-org">ITC</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Swetha Guhan</div>
+                <div class="member-org">Key Education Foundation</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Vidita Priyadarshini</div>
+                <div class="member-org">SCALE</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member aspire-poc">
+                <div class="member-name">Parikrama Chowdhry</div>
+                <div class="member-org">ASPIRE, J-PAL South Asia</div>
+                <span class="member-role role-aspire">ASPIRE POC</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ WG2 ═══════════════ -->
+<section id="wg2">
+    <div class="container">
+        <h2>Working Group 2: Methods &amp; Frameworks</h2>
+        <p class="section-subtitle">6 members • Lead: Pooja Srivathsan (Madhi Foundation)</p>
+
+        <div class="alert">
+            <strong>Purpose:</strong> Will identify gaps in understanding of concepts related to costing and impact. Will consolidate existing knowledge on costing frameworks, heuristics, and develop an exhaustive glossary of costing-related concepts adapted for South Asian context.
+        </div>
+
+        <h3>Members</h3>
+        <div class="member-grid">
+            <div class="member">
+                <div class="member-name">Pooja Srivathsan</div>
+                <div class="member-org">Madhi Foundation</div>
+                <span class="member-role role-captain">Lead</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Pulkit Aggarwal</div>
+                <div class="member-org">World Bank</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Danish Ahmad</div>
+                <div class="member-org">Noora Health</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Monika Sharma</div>
+                <div class="member-org">UNESCO MGIEP</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Dr. Shreesha Bhat</div>
+                <div class="member-org">Akanksha Foundation</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">S Ravindra Reddy</div>
+                <div class="member-org">India Literacy Project</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member aspire-poc">
+                <div class="member-name">Rijul Grover</div>
+                <div class="member-org">ASPIRE, J-PAL South Asia</div>
+                <span class="member-role role-aspire">ASPIRE POC</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ WG3 ═══════════════ -->
+<section id="wg3">
+    <div class="container">
+        <h2>Working Group 3: Applied Analysis &amp; Case Work</h2>
+        <p class="section-subtitle">6 members • Lead: Suchandrima Chakraborty (Khushi Baby)</p>
+
+        <div class="alert">
+            <strong>Purpose:</strong> Will identify sources of publicly available costing data and use-cases for case studies. Will analyze available cost data to derive insights on costing from a pilot-to-scale perspective.
+        </div>
+
+        <h3>Members</h3>
+        <div class="member-grid">
+            <div class="member">
+                <div class="member-name">Suchandrima Chakraborty</div>
+                <div class="member-org">Khushi Baby</div>
+                <span class="member-role role-captain">Lead</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Sarathanjali Manoharan</div>
+                <div class="member-org">Presidential Secretariat</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Dr. Vinti K. Agarwal</div>
+                <div class="member-org">Citizen Ecofinalytics</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Prince Sachdeva</div>
+                <div class="member-org">Independent Consultant</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Shraddha Gupta</div>
+                <div class="member-org">NTPC Ltd.</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member">
+                <div class="member-name">Matteo Santangelo Ravà</div>
+                <div class="member-org">Aix Marseille University</div>
+                <span class="member-role">Member</span>
+            </div>
+            <div class="member aspire-poc">
+                <div class="member-name">Aravind Nair</div>
+                <div class="member-org">ASPIRE, J-PAL South Asia</div>
+                <span class="member-role role-aspire">J-PAL POC</span>
+            </div>
+            <div class="member aspire-poc">
+                <div class="member-name">Trisha Pande</div>
+                <div class="member-org">ASPIRE, J-PAL South Asia</div>
+                <span class="member-role role-aspire">J-PAL POC</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ TIMELINE ═══════════════ -->
+<section id="timeline">
+    <div class="container">
+        <h2>Project Timeline</h2>
+        <p class="section-subtitle">5 phases</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-status">Phase 1 — Current</div>
+                    <div class="timeline-title">Launch &amp; Alignment</div>
+                </div>
+                <div class="timeline-right">
+                    <div class="timeline-desc"><strong>Oct 2025 – May 2026</strong><br>Member confirmation, launch webinar, feedback collection, Steering Group setup, Working Group formation</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-status">Phase 2 — Next</div>
+                    <div class="timeline-title">Shared Foundations</div>
+                </div>
+                <div class="timeline-right">
+                    <div class="timeline-desc"><strong>May – Jul 2026</strong><br>Resource compendium, expert sessions, glossary development, core frameworks</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-status">Phase 3</div>
+                    <div class="timeline-title">Frameworks &amp; Methods</div>
+                </div>
+                <div class="timeline-right">
+                    <div class="timeline-desc"><strong>Aug – Oct 2026</strong><br>Adapt global frameworks, compare partner approaches, pilot-to-scale costing structures</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-status">Phase 4</div>
+                    <div class="timeline-title">Applied Examples</div>
+                </div>
+                <div class="timeline-right">
+                    <div class="timeline-desc"><strong>Nov 2026 – Mar 2027</strong><br>Case studies, scenario analysis, real-world validation</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-left">
+                    <div class="timeline-status">Phase 5</div>
+                    <div class="timeline-title">Tools &amp; Synthesis</div>
+                </div>
+                <div class="timeline-right">
+                    <div class="timeline-desc"><strong>Nov 2026 – Mar 2027</strong><br>Toolkits, templates, synthesis notes, ecosystem dissemination</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════ RESOURCES ═══════════════ -->
+<section id="resources">
+    <div class="container">
+        <h2>Resources</h2>
+        <p class="section-subtitle">J-PAL resources on cost-effectiveness analysis and evaluation</p>
+
+        <div class="alert">
+            The Collective builds on J-PAL's extensive work on cost-effectiveness. Below are foundational resources to support understanding of costing methodologies and frameworks.
+        </div>
+
+        <div class="resource-item">
+            <div class="resource-title">Cost-Effectiveness Analysis: A Guide for Practitioners</div>
+            <div class="resource-desc">Comprehensive guide on how to conduct cost-effectiveness analyses, including practical tools for collecting high-quality cost data during program implementation.</div>
+            <a href="https://www.povertyactionlab.org/resource/cost-benefit-analysis-social-programs" class="resource-link" target="_blank">View on J-PAL →</a>
+        </div>
+        <div class="resource-item">
+            <div class="resource-title">ASPIRE at J-PAL South Asia</div>
+            <div class="resource-desc">Learn more about ASPIRE's mission to engage policymakers in adopting evidence-based solutions at scale, creating pathways for large-scale social impact.</div>
+            <a href="https://www.povertyactionlab.org/aspire" class="resource-link" target="_blank">View on J-PAL →</a>
+        </div>
+        <div class="resource-item">
+            <div class="resource-title">GiveWell — Cost-Effectiveness Models</div>
+            <div class="resource-desc">GiveWell's approach to cost-effectiveness analysis, including their models for comparing the impact of donations across top-rated charities and interventions.</div>
+            <a href="https://www.givewell.org/how-we-work/our-criteria/cost-effectiveness/cost-effectiveness-models" class="resource-link" target="_blank">View on GiveWell →</a>
+        </div>
+        <div class="resource-item">
+            <div class="resource-title">MVPF (MIT) — Marginal Value of Public Funds</div>
+            <div class="resource-desc">The Policy Impacts lab at MIT provides MVPF estimates for hundreds of government programs and policies, enabling rigorous comparisons of the welfare impact of public spending.</div>
+            <a href="https://policyimpacts.org/" class="resource-link" target="_blank">View on Policy Impacts at MIT →</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showSection(sectionId) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        event.target.classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function togglePhase(header) {
+        const body = header.nextElementSibling;
+        const isOpen = header.classList.contains('open');
+        header.classList.toggle('open', !isOpen);
+        body.classList.toggle('open', !isOpen);
+    }
+
+    function toggleMsGroup(header) {
+        const body = header.nextElementSibling;
+        const isOpen = header.classList.contains('open');
+        header.classList.toggle('open', !isOpen);
+        body.classList.toggle('open', !isOpen);
+    }
+</script>
+</body>
+</html>
